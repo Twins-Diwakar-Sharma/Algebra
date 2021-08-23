@@ -11,7 +11,7 @@ class Vec
     public:
         Vec(int size);
         ~Vec();
-        Vec(Vec&);
+        Vec(Vec&); // l value copy constructor
         Vec(Vec&&);
 };
 

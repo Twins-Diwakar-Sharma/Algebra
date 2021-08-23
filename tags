@@ -10,12 +10,20 @@
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210110.0/
 $(prog)	makefile	/^$(prog):	$(objects)$/;"	t
+Algebra	README.md	/^# Algebra$/;"	c
+H_AL_Z3BR0_H	incsrc/Algebra.h	/^#define H_AL_Z3BR0_H$/;"	d
+Vec	incsrc/Algebra.cpp	/^Vec::Vec(Vec& vec)$/;"	f	class:Vec
+Vec	incsrc/Algebra.cpp	/^Vec::Vec(int size)$/;"	f	class:Vec
+Vec	incsrc/Algebra.h	/^class Vec$/;"	c
 all	makefile	/^all:	directories $(prog)$/;"	t
 bld/%.o	makefile	/^bld\/%.o:	incsrc\/%.cpp$/;"	t
 classes	makefile	/^classes	=$(shell find incsrc -name *.cpp)$/;"	m
 clean	makefile	/^clean:$/;"	t
+data	incsrc/Algebra.h	/^        float* data;$/;"	m	class:Vec	typeref:typename:float *
 directories	makefile	/^directories:$/;"	t
 main	incsrc/main.cpp	/^int main()$/;"	f	typeref:typename:int
 objects	makefile	/^objects	=$(patsubst incsrc\/%,bld\/%,$(classes:.cpp=.o))$/;"	m
 prog	makefile	/^prog	=math$/;"	m
 purge	makefile	/^purge: clean$/;"	t
+size	incsrc/Algebra.h	/^        int size;$/;"	m	class:Vec	typeref:typename:int
+~Vec	incsrc/Algebra.cpp	/^Vec::~Vec()$/;"	f	class:Vec
