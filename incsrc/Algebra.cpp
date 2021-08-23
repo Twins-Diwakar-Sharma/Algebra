@@ -67,3 +67,5 @@ Vec& Vec::operator=(Vec&& vec)
     vec.data = toDelete;
     return *this;
 }
+
+

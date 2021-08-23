@@ -17,6 +17,11 @@ class Vec
 
         Vec& operator=(Vec&&); // r value assignment
         Vec& operator=(Vec&); //l value assignment
+
+        friend Vec operator-(Vec&,Vec&);
+        friend Vec operator-(Vec&, Vec&&);
+        friend Vec operator-(Vec&&, Vec&);
+        friend Vec operator-(Vec&&, Vec&&);
 };
 
 #endif
