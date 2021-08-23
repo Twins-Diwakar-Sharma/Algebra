@@ -12,9 +12,11 @@ class Vec
         Vec(int size);
         ~Vec();
         Vec(Vec&); // l value copy constructor
-        Vec(Vec&&);
+        Vec(Vec&&); // r value copy constructor
 
-        Vec& operator=(Vec&&);
+
+        Vec& operator=(Vec&&); // r value assignment
+        Vec& operator=(Vec&); //l value assignment
 };
 
 #endif
