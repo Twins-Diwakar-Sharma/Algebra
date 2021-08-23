@@ -8,15 +8,18 @@ class Vec
     private:
         float* data;
         int size;
+
     public:
         Vec(int size);
-        ~Vec();
         Vec(Vec&); // l value copy constructor
         Vec(Vec&&); // r value copy constructor
+        ~Vec();
 
-
-        Vec& operator=(Vec&&); // r value assignment
         Vec& operator=(Vec&); //l value assignment
+        Vec& operator=(Vec&&); // r value assignment
+
+        float& operator[](int i);
+        int getSize();
 
         friend Vec operator-(Vec&,Vec&);
         friend Vec operator-(Vec&, Vec&&);
