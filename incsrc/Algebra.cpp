@@ -42,7 +42,7 @@ Vec::Vec(Vec&& vec)
 {
     size = vec.size;
     data = vec.data;
-    vec.data = nullptr;  
+      
 }
 
 Vec Vec::operator=(Vec& vec)
