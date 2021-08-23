@@ -53,3 +53,17 @@ Vec& Vec::operator=(Vec& vec)
         data[i] = vec.data[i];
     return *this;
 }
+
+Vec& Vec::operator=(Vec&& vec)
+{
+    // we need to delete this->data before we replace it with new ata to prevent memory leaks
+    // so we have to write delete [] this->data,
+    // but we can be clever in doing so ..
+    // we know that vec is going to be deleted so we point vec.data to content of this->data
+    // this we compiler will delete previous data while deleting vec and we dont have to bother
+    this->size = vec.size;
+    float* toDelete = this->data;
+    data = vec.data;
+    vec.data = toDelete;
+    return *this;
+}
