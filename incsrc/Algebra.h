@@ -15,6 +15,8 @@ class Vec
         Vec(Vec&&); // r value copy constructor
         ~Vec();
 
+        int getSize();
+
         Vec& operator=(Vec&); //l value assignment
         Vec& operator=(Vec&&); // r value assignment
 
@@ -25,7 +27,13 @@ class Vec
         friend Vec operator+(Vec&&, Vec&);
         friend Vec operator+(Vec&&, Vec&&);
 
-        int getSize();
+        friend Vec operator-(Vec&,Vec&);
+        friend Vec operator-(Vec&, Vec&&);
+        friend Vec operator-(Vec&&, Vec&);
+        friend Vec operator-(Vec&&, Vec&&);
+
+        friend Vec operator*(float,Vec&);
+        friend Vec operator*(float,Vec&&);
 };
 
 #endif
