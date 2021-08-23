@@ -20,6 +20,11 @@ class Vec
 
         float& operator[](int i);
 
+        friend Vec operator+(Vec&, Vec&);
+        friend Vec operator+(Vec&, Vec&&);
+        friend Vec operator+(Vec&&, Vec&);
+        friend Vec operator+(Vec&&, Vec&&);
+
         int getSize();
 };
 

@@ -72,11 +72,69 @@ float& Vec::operator[](int i)
 {
     if(i >= size)
         std::cerr<<"Requested index "<<i<<" out of bounds "<<std::endl;
-    if(i < 0)
+    else if(i < 0)
         std::cerr<<"negative index ? seriously ? Are you that noob"<<std::endl;
-    
-    return data[i];
+    else 
+        return data[i];
 }
+
+Vec operator+(Vec& a, Vec& b)
+{
+    if(a.size != b.size)
+    {   
+        std::cerr<<"cannot add !! size not same"<<std::endl;
+        return NULL;
+    }
+
+    Vec v(a.size);
+    for(int i=0; i<v.size; i++)
+        v[i] = a[i]+b[i];
+
+    return v;
+}
+ 
+Vec operator+(Vec& a, Vec&& b)
+{
+    if(a.size != b.size)
+    {   
+        std::cerr<<"cannot add !! size not same"<<std::endl;
+        return NULL;
+    }
+    
+    for(int i=0; i<a.size; i++)
+        b[i] = a[i] + b[i];
+    
+    return std::move(b);
+}
+ 
+Vec operator+(Vec&& a, Vec& b)
+{
+    if(a.size != b.size)
+    {   
+        std::cerr<<"cannot add !! size not same"<<std::endl;
+        return NULL;
+    }
+    
+    for(int i=0; i<a.size; i++)
+        a[i] = a[i] + b[i];
+    
+    return std::move(a);
+}
+ 
+Vec operator+(Vec&& a, Vec&& b)
+{
+    if(a.size != b.size)
+    {   
+        std::cerr<<"cannot add !! size not same"<<std::endl;
+        return NULL;
+    }
+    
+    for(int i=0; i<a.size; i++)
+        b[i] = a[i] + b[i];
+   
+    return std::move(b);
+}
+
 
 int Vec::getSize()
 {
