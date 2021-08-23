@@ -14,7 +14,7 @@ class Vec
         Vec(Vec&); // l value copy constructor
         Vec(Vec&&); // r value copy constructor
 
-        Vec operator=(Vec&); //l value assignment
+        Vec& operator=(Vec&); //l value assignment
 };
 
 #endif
