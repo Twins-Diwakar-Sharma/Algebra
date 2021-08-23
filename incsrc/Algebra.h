@@ -19,8 +19,15 @@ class Vec
         Vec& operator=(Vec&&); // r value assignment
 
         float& operator[](int i);
-
         int getSize();
+
+        friend Vec operator-(Vec&,Vec&);
+        friend Vec operator-(Vec&, Vec&&);
+        friend Vec operator-(Vec&&, Vec&);
+        friend Vec operator-(Vec&&, Vec&&);
+
+        friend Vec operator*(float,Vec&);
+        friend Vec operator*(float,Vec&&);
 };
 
 #endif
