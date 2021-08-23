@@ -61,6 +61,7 @@ Vec& Vec::operator=(Vec&& vec)
     // but we can be clever in doing so ..
     // we know that vec is going to be deleted so we point vec.data to content of this->data
     // this we compiler will delete previous data while deleting vec and we dont have to bother
+
     this->size = vec.size;
     float* toDelete = this->data;
     data = vec.data;
@@ -83,3 +84,83 @@ int Vec::getSize()
     return size;
 }
 
+Vec operator-(Vec& a, Vec& b)
+{
+
+    if(a.size != b.size)
+    {
+        std::cerr << "size of vectors donnot match" << std::endl;
+    }
+    Vec res(a.size);
+    for(int i=0; i<res.size; i++)
+    {
+        res.data[i] = a.data[i] - b.data[i];
+    }
+    return res;
+}
+
+Vec operator-(Vec& a, Vec&& b)
+{
+    if(a.size != b.size)
+    {
+        std::cerr << "size of vectors donnot match" << std::endl;
+        return NULL;
+    }
+
+    // b is temporary, so we will use it instead
+    for(int i=0; i<a.size; i++)
+    {
+        b.data[i] = a.data[i] - b.data[i];
+    }
+    return std::move(b);
+}
+
+Vec operator-(Vec&& a, Vec& b)
+{
+    if(a.size != b.size)
+    {
+        std::cerr << "size of vectors donnot match" << std::endl;
+        return NULL;
+    }   
+    // a is temporary, so we will use it instead
+    for(int i=0; i<a.size; i++)
+    {
+        a.data[i] = a.data[i] - b.data[i];
+    }
+    return std::move(a);
+}
+
+Vec operator-(Vec&& a, Vec&& b)
+{
+    if(a.size != b.size)
+    {
+        std::cerr << "size of vectors donnot match" << std::endl;
+        return NULL;
+    }   
+    // a is temporary, so we will use it instead
+    for(int i=0; i<a.size; i++)
+    {
+        a.data[i] = a.data[i] - b.data[i];
+    }
+    return std::move(a);
+}
+
+Vec operator*(float f, Vec& vec)
+{
+    Vec res(vec.size);
+    for(int i=0; i<vec.size; i++)
+    {
+        res.data[i] = f*vec.data[i];
+    }
+    return res;
+}
+
+Vec operator*(float f, Vec&& vec)
+{
+    // use temp vec
+    for(int i=0; i<vec.size; i++)
+    {
+        vec.data[i] = f*vec.data[i];
+    }
+    return std::move(vec);
+}

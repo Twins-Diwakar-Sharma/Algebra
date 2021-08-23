@@ -25,6 +25,9 @@ class Vec
         friend Vec operator-(Vec&, Vec&&);
         friend Vec operator-(Vec&&, Vec&);
         friend Vec operator-(Vec&&, Vec&&);
+
+        friend Vec operator*(float,Vec&);
+        friend Vec operator*(float,Vec&&);
 };
 
 #endif

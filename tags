@@ -13,6 +13,7 @@ $(prog)	makefile	/^$(prog):	$(objects)$/;"	t
 Algebra	README.md	/^# Algebra$/;"	c
 H_AL_Z3BR0_H	incsrc/Algebra.h	/^#define H_AL_Z3BR0_H$/;"	d
 Vec	incsrc/Algebra.cpp	/^Vec::Vec(Vec& vec)$/;"	f	class:Vec
+Vec	incsrc/Algebra.cpp	/^Vec::Vec(Vec&& vec)$/;"	f	class:Vec
 Vec	incsrc/Algebra.cpp	/^Vec::Vec(int size)$/;"	f	class:Vec
 Vec	incsrc/Algebra.h	/^class Vec$/;"	c
 all	makefile	/^all:	directories $(prog)$/;"	t
@@ -21,8 +22,18 @@ classes	makefile	/^classes	=$(shell find incsrc -name *.cpp)$/;"	m
 clean	makefile	/^clean:$/;"	t
 data	incsrc/Algebra.h	/^        float* data;$/;"	m	class:Vec	typeref:typename:float *
 directories	makefile	/^directories:$/;"	t
+getSize	incsrc/Algebra.cpp	/^int Vec::getSize()$/;"	f	class:Vec	typeref:typename:int
 main	incsrc/main.cpp	/^int main()$/;"	f	typeref:typename:int
 objects	makefile	/^objects	=$(patsubst incsrc\/%,bld\/%,$(classes:.cpp=.o))$/;"	m
+operator *	incsrc/Algebra.cpp	/^Vec operator*(float f, Vec& vec)$/;"	f	typeref:typename:Vec
+operator *	incsrc/Algebra.cpp	/^Vec operator*(float f, Vec&& vec)$/;"	f	typeref:typename:Vec
+operator -	incsrc/Algebra.cpp	/^Vec operator-(Vec& a, Vec& b)$/;"	f	typeref:typename:Vec
+operator -	incsrc/Algebra.cpp	/^Vec operator-(Vec& a, Vec&& b)$/;"	f	typeref:typename:Vec
+operator -	incsrc/Algebra.cpp	/^Vec operator-(Vec&& a, Vec& b)$/;"	f	typeref:typename:Vec
+operator -	incsrc/Algebra.cpp	/^Vec operator-(Vec&& a, Vec&& b)$/;"	f	typeref:typename:Vec
+operator =	incsrc/Algebra.cpp	/^Vec& Vec::operator=(Vec& vec)$/;"	f	class:Vec	typeref:typename:Vec &
+operator =	incsrc/Algebra.cpp	/^Vec& Vec::operator=(Vec&& vec)$/;"	f	class:Vec	typeref:typename:Vec &
+operator []	incsrc/Algebra.cpp	/^float& Vec::operator[](int i)$/;"	f	class:Vec	typeref:typename:float &
 prog	makefile	/^prog	=math$/;"	m
 purge	makefile	/^purge: clean$/;"	t
 size	incsrc/Algebra.h	/^        int size;$/;"	m	class:Vec	typeref:typename:int
