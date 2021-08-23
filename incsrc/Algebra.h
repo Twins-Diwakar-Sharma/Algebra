@@ -13,6 +13,8 @@ class Vec
         ~Vec();
         Vec(Vec&); // l value copy constructor
         Vec(Vec&&);
+
+        Vec& operator=(Vec&&);
 };
 
 #endif

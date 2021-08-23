@@ -37,3 +37,12 @@ Vec::Vec(Vec& vec)
     for(int i=0; i<size; i++)
         data[i] = vec.data[i];
 }
+
+Vec& Vec::operator=(Vec&& vec)
+{
+    this->size = vec.size;
+    float* toDelete = this->data;
+    data = vec.data;
+    vec.data = toDelete;
+    return *this;
+}
