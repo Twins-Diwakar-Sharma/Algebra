@@ -35,5 +35,21 @@ Vec::Vec(Vec& vec)
     size = vec.size;
     data = new float[size];
     for(int i=0; i<size; i++)
+        data[i] = vec.data[i]; 
+}
+
+Vec::Vec(Vec&& vec)
+{
+    size = vec.size;
+    data = vec.data;
+    vec.data = nullptr;   
+}
+
+Vec& Vec::operator=(Vec& vec)
+{
+    size = vec.size;
+    data = new float[size];
+    for(int i=0; i<size; i++)
         data[i] = vec.data[i];
+    return *this;
 }
