@@ -12,6 +12,10 @@
 $(prog)	makefile	/^$(prog):	$(objects)$/;"	t
 Algebra	README.md	/^# Algebra$/;"	c
 H_AL_Z3BR0_H	incsrc/Algebra.h	/^#define H_AL_Z3BR0_H$/;"	d
+Mat	incsrc/Algebra.cpp	/^Mat::Mat(Mat& mat)$/;"	f	class:Mat
+Mat	incsrc/Algebra.cpp	/^Mat::Mat(Mat&& mat)$/;"	f	class:Mat
+Mat	incsrc/Algebra.cpp	/^Mat::Mat(int row,int col)$/;"	f	class:Mat
+Mat	incsrc/Algebra.h	/^class Mat$/;"	c
 Vec	incsrc/Algebra.cpp	/^Vec::Vec(Vec& vec)$/;"	f	class:Vec
 Vec	incsrc/Algebra.cpp	/^Vec::Vec(Vec&& vec)$/;"	f	class:Vec
 Vec	incsrc/Algebra.cpp	/^Vec::Vec(int size)$/;"	f	class:Vec
@@ -20,11 +24,22 @@ all	makefile	/^all:	directories $(prog)$/;"	t
 bld/%.o	makefile	/^bld\/%.o:	incsrc\/%.cpp$/;"	t
 classes	makefile	/^classes	=$(shell find incsrc -name *.cpp)$/;"	m
 clean	makefile	/^clean:$/;"	t
+col	incsrc/Algebra.h	/^        int row, col;$/;"	m	class:Mat	typeref:typename:int
 data	incsrc/Algebra.h	/^        float* data;$/;"	m	class:Vec	typeref:typename:float *
+data	incsrc/Algebra.h	/^        float** data;$/;"	m	class:Mat	typeref:typename:float **
 directories	makefile	/^directories:$/;"	t
+getCol	incsrc/Algebra.cpp	/^int Mat::getCol()$/;"	f	class:Mat	typeref:typename:int
+getDimension	incsrc/Algebra.cpp	/^void Mat::getDimension(int& r, int& c)$/;"	f	class:Mat	typeref:typename:void
+getRow	incsrc/Algebra.cpp	/^int Mat::getRow()$/;"	f	class:Mat	typeref:typename:int
 getSize	incsrc/Algebra.cpp	/^int Vec::getSize()$/;"	f	class:Vec	typeref:typename:int
 main	incsrc/main.cpp	/^int main()$/;"	f	typeref:typename:int
 objects	makefile	/^objects	=$(patsubst incsrc\/%,bld\/%,$(classes:.cpp=.o))$/;"	m
+operator *	incsrc/Algebra.cpp	/^Vec operator*(Mat& mat, Vec& vec)$/;"	f	typeref:typename:Vec
+operator *	incsrc/Algebra.cpp	/^Vec operator*(Mat& mat, Vec&& vec)$/;"	f	typeref:typename:Vec
+operator *	incsrc/Algebra.cpp	/^Vec operator*(Mat&& mat, Vec& vec)$/;"	f	typeref:typename:Vec
+operator *	incsrc/Algebra.cpp	/^Vec operator*(Mat&& mat, Vec&& vec)$/;"	f	typeref:typename:Vec
+operator *	incsrc/Algebra.cpp	/^Vec operator*(Vec& v, float f)$/;"	f	typeref:typename:Vec
+operator *	incsrc/Algebra.cpp	/^Vec operator*(Vec&& vec, float f)$/;"	f	typeref:typename:Vec
 operator *	incsrc/Algebra.cpp	/^Vec operator*(float f, Vec& vec)$/;"	f	typeref:typename:Vec
 operator *	incsrc/Algebra.cpp	/^Vec operator*(float f, Vec&& vec)$/;"	f	typeref:typename:Vec
 operator +	incsrc/Algebra.cpp	/^Vec operator+(Vec& a, Vec& b)$/;"	f	typeref:typename:Vec
@@ -35,10 +50,15 @@ operator -	incsrc/Algebra.cpp	/^Vec operator-(Vec& a, Vec& b)$/;"	f	typeref:type
 operator -	incsrc/Algebra.cpp	/^Vec operator-(Vec& a, Vec&& b)$/;"	f	typeref:typename:Vec
 operator -	incsrc/Algebra.cpp	/^Vec operator-(Vec&& a, Vec& b)$/;"	f	typeref:typename:Vec
 operator -	incsrc/Algebra.cpp	/^Vec operator-(Vec&& a, Vec&& b)$/;"	f	typeref:typename:Vec
+operator =	incsrc/Algebra.cpp	/^Mat& Mat::operator=(Mat& m)$/;"	f	class:Mat	typeref:typename:Mat &
+operator =	incsrc/Algebra.cpp	/^Mat& Mat::operator=(Mat&& m)$/;"	f	class:Mat	typeref:typename:Mat &
 operator =	incsrc/Algebra.cpp	/^Vec& Vec::operator=(Vec& vec)$/;"	f	class:Vec	typeref:typename:Vec &
 operator =	incsrc/Algebra.cpp	/^Vec& Vec::operator=(Vec&& vec)$/;"	f	class:Vec	typeref:typename:Vec &
 operator []	incsrc/Algebra.cpp	/^float& Vec::operator[](int i)$/;"	f	class:Vec	typeref:typename:float &
+operator []	incsrc/Algebra.cpp	/^float* Mat::operator[](int i)$/;"	f	class:Mat	typeref:typename:float *
 prog	makefile	/^prog	=math$/;"	m
 purge	makefile	/^purge: clean$/;"	t
+row	incsrc/Algebra.h	/^        int row, col;$/;"	m	class:Mat	typeref:typename:int
 size	incsrc/Algebra.h	/^        int size;$/;"	m	class:Vec	typeref:typename:int
+~Mat	incsrc/Algebra.cpp	/^Mat::~Mat()$/;"	f	class:Mat
 ~Vec	incsrc/Algebra.cpp	/^Vec::~Vec()$/;"	f	class:Vec

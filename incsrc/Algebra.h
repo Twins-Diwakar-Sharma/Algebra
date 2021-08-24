@@ -47,6 +47,8 @@ class Mat
 
     public:
         Mat(int row, int col);
+        Mat(Mat&);
+        Mat(Mat&&);
         ~Mat();
         int getRow();
         int getCol();
@@ -57,6 +59,10 @@ class Mat
 
         float* operator[](int);
 
+        friend Vec operator*(Mat&,Vec&);
+        friend Vec operator*(Mat&,Vec&&);
+        friend Vec operator*(Mat&&,Vec&);
+        friend Vec operator*(Mat&&,Vec&&);
 };
 
 #endif
