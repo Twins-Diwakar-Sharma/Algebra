@@ -222,3 +222,31 @@ Vec operator*(float f, Vec&& vec)
     }
     return std::move(vec);
 }
+
+Mat::Mat(int row,int col)
+{
+    this->row = row;
+    this->col = col;
+
+    data = new float*[row];
+    for(int i=0; i<row; i++)
+    {
+        data[i] = new float[col];
+    }
+
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            data[i][j] = 0;
+        }
+    }
+}
+
+Mat::~Mat()
+{
+    for(int i=0; i<row; i++)
+        delete [] data[i];
+
+    delete [] data;
+}
