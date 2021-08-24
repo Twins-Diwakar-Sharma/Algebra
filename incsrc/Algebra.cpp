@@ -19,6 +19,7 @@
 
 Vec::Vec(int size)
 {
+    std::cout <<"ctr" << std::endl;
     this->size = size;
     data = new float[size];
     for(int i=0; i<size; i++)
@@ -27,11 +28,13 @@ Vec::Vec(int size)
 
 Vec::~Vec()
 {
+    std::cout << "dtr" << std::endl;
     delete [] data;
 }
 
 Vec::Vec(Vec& vec)
 {
+    std::cout << "cpy" << std::endl;
     size = vec.size;
     data = new float[size];
     for(int i=0; i<size; i++)
@@ -40,6 +43,7 @@ Vec::Vec(Vec& vec)
 
 Vec::Vec(Vec&& vec)
 {
+    std::cout << "mv" << std::endl;
     size = vec.size;
     data = vec.data;
     vec.data = nullptr;   
@@ -47,6 +51,7 @@ Vec::Vec(Vec&& vec)
 
 Vec& Vec::operator=(Vec& vec)
 {
+    std::cout << "=" << std::endl;
     size = vec.size;
     data = new float[size];
     for(int i=0; i<size; i++)
@@ -62,6 +67,7 @@ Vec& Vec::operator=(Vec&& vec)
     // we know that vec is going to be deleted so we point vec.data to content of this->data
     // this we compiler will delete previous data while deleting vec and we dont have to bother
 
+    std::cout << "mv =" << std::endl;
     this->size = vec.size;
     float* toDelete = this->data;
     data = vec.data;
@@ -81,6 +87,7 @@ float& Vec::operator[](int i)
 
 Vec operator+(Vec& a, Vec& b)
 {
+    std::cout << "l+l" << std::endl;
     if(a.size != b.size)
     {   
         std::cerr<<"cannot add !! size not same"<<std::endl;
@@ -96,6 +103,7 @@ Vec operator+(Vec& a, Vec& b)
  
 Vec operator+(Vec& a, Vec&& b)
 {
+    std::cout << "l+r" << std::endl;
     if(a.size != b.size)
     {   
         std::cerr<<"cannot add !! size not same"<<std::endl;
@@ -110,6 +118,7 @@ Vec operator+(Vec& a, Vec&& b)
  
 Vec operator+(Vec&& a, Vec& b)
 {
+    std::cout << "r+l" << std::endl;
     if(a.size != b.size)
     {   
         std::cerr<<"cannot add !! size not same"<<std::endl;
@@ -124,6 +133,7 @@ Vec operator+(Vec&& a, Vec& b)
  
 Vec operator+(Vec&& a, Vec&& b)
 {
+    std::cout << "r+r" << std::endl;
     if(a.size != b.size)
     {   
         std::cerr<<"cannot add !! size not same"<<std::endl;
@@ -223,6 +233,26 @@ Vec operator*(float f, Vec&& vec)
     return std::move(vec);
 }
 
+Vec operator*(Vec& v, float f)
+{
+    Vec res(v.size); 
+    for(int i=0; i<v.size; i++)
+    {
+        res.data[i] = f*v.data[i];
+    }
+    return res;
+}
+
+Vec operator*(Vec&& vec, float f)
+{
+    // use temp vec
+    for(int i=0; i<vec.size; i++)
+    {
+        vec.data[i] = f*vec.data[i];
+    }
+    return std::move(vec);
+}
+
 Mat::Mat(int row,int col)
 {
     this->row = row;
@@ -251,6 +281,7 @@ Mat::~Mat()
     delete [] data;
 }
 
+
 Mat::Mat(Mat& mat)
 {
     this->row = mat.row;
@@ -268,9 +299,7 @@ Mat::Mat(Mat& mat)
 Mat::Mat(Mat&& mat)
 {
     row = mat.row;    col = mat.col; 
-    data = mat.data;
-   
-    mat.row = 0; mat.col = 0;
+    data = mat.data;   
     mat.data = nullptr;
 }
 
@@ -282,7 +311,7 @@ Vec operator*(Mat& mat, Vec& vec)
        for(int i=0; i<mat.row; i++)
            for(int j=0; j<mat.col; j++)
                res[i] += vec[j]*mat.data[i][j];
-       return std::move(res);
+       return res;
     }
     else
     {
@@ -299,7 +328,7 @@ Vec operator*(Mat& mat, Vec&& vec)
        for(int i=0; i<mat.row; i++)
            for(int j=0; j<mat.col; j++)
                res[i] += vec[j]*mat.data[i][j];
-       return std::move(res);
+       return res;
     }
     else
     {
@@ -316,7 +345,7 @@ Vec operator*(Mat&& mat, Vec& vec)
        for(int i=0; i<mat.row; i++)
            for(int j=0; j<mat.col; j++)
                res[i] += vec[j]*mat.data[i][j];
-       return std::move(res);
+       return res;
     }
     else
     {
@@ -333,7 +362,7 @@ Vec operator*(Mat&& mat, Vec&& vec)
        for(int i=0; i<mat.row; i++)
            for(int j=0; j<mat.col; j++)
                res[i] += vec[j]*mat.data[i][j];
-       return std::move(res);
+       return res;
     }
     else
     {
@@ -342,4 +371,52 @@ Vec operator*(Mat&& mat, Vec&& vec)
     }
 }
 
+
+
+int Mat::getRow()
+{
+    return row;
+}
+
+int Mat::getCol()
+{
+    return col;
+}
+
+void Mat::getDimension(int& r, int& c)
+{
+    r = row;    c = col;
+}
+
+Mat& Mat::operator=(Mat& m)
+{
+    this->row = m.row;
+    this->col = m.col;
+
+    for(int i=0; i<m.row; i++)
+        for(int j=0; j<m.col; j++)
+            data[i][j] = m.data[i][j];
+
+    return *this;
+}
+
+Mat& Mat::operator=(Mat&& m)
+{
+    this->row = m.row;
+    this->col = m.col;
+
+    float** temp = this->data;
+    data = m.data;
+    m.data = temp;
+
+    return *this;
+}
+
+float* Mat::operator[](int i)
+{
+    if(i<row && i>=0)
+        return data[i];
+    else
+        std::cerr<<"out of bounds exception for row no "<<i<<std::endl;
+}
 
