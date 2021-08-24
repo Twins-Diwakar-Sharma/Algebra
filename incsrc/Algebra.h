@@ -34,6 +34,9 @@ class Vec
 
         friend Vec operator*(float,Vec&);
         friend Vec operator*(float,Vec&&);
+
+        friend Vec operator*(Vec&, float);
+        friend Vec operator*(Vec&&, float);
 };
 
 class Mat
@@ -45,6 +48,14 @@ class Mat
     public:
         Mat(int row, int col);
         ~Mat();
+        int getRow();
+        int getCol();
+        void getDimension(int& r, int& c);
+
+        Mat& operator=(Mat&);
+        Mat& operator=(Mat&&);
+
+        float* operator[](int);
 
 };
 

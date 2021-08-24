@@ -223,6 +223,26 @@ Vec operator*(float f, Vec&& vec)
     return std::move(vec);
 }
 
+Vec operator*(Vec& v, float f)
+{
+    Vec res(v.size); 
+    for(int i=0; i<v.size; i++)
+    {
+        res.data[i] = f*v.data[i];
+    }
+    return res;
+}
+
+Vec operator*(Vec&& vec, float f)
+{
+    // use temp vec
+    for(int i=0; i<vec.size; i++)
+    {
+        vec.data[i] = f*vec.data[i];
+    }
+    return std::move(vec);
+}
+
 Mat::Mat(int row,int col)
 {
     this->row = row;
@@ -249,4 +269,51 @@ Mat::~Mat()
         delete [] data[i];
 
     delete [] data;
+}
+
+int Mat::getRow()
+{
+    return row;
+}
+
+int Mat::getCol()
+{
+    return col;
+}
+
+void Mat::getDimension(int& r, int& c)
+{
+    r = row;    c = col;
+}
+
+Mat& Mat::operator=(Mat& m)
+{
+    this->row = m.row;
+    this->col = m.col;
+
+    for(int i=0; i<m.row; i++)
+        for(int j=0; j<m.col; j++)
+            data[i][j] = m.data[i][j];
+
+    return *this;
+}
+
+Mat& Mat::operator=(Mat&& m)
+{
+    this->row = m.row;
+    this->col = m.col;
+
+    float** temp = this->data;
+    data = m.data;
+    m.data = temp;
+
+    return *this;
+}
+
+float* Mat::operator[](int i)
+{
+    if(i<row && i>=0)
+        return data[i];
+    else
+        std::cerr<<"out of bounds exception for row no "<<i<<std::endl;
 }
