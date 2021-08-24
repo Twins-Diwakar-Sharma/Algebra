@@ -44,8 +44,14 @@ class Mat
 
     public:
         Mat(int row, int col);
+        Mat(Mat&);
+        Mat(Mat&&);
         ~Mat();
 
+        friend Vec operator*(Mat&,Vec&);
+        friend Vec operator*(Mat&,Vec&&);
+        friend Vec operator*(Mat&&,Vec&);
+        friend Vec operator*(Mat&&,Vec&&);
 };
 
 #endif

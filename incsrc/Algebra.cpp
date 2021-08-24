@@ -250,3 +250,96 @@ Mat::~Mat()
 
     delete [] data;
 }
+
+Mat::Mat(Mat& mat)
+{
+    this->row = mat.row;
+    this->col = mat.col;
+
+    data = new float*[row];
+    for(int i=0; i<row; i++)
+        data[i] = new float[col];
+
+    for(int i=0; i<row; i++)
+        for(int j=0; j<col; j++)
+            data[i][j] = mat.data[i][j];
+}
+
+Mat::Mat(Mat&& mat)
+{
+    row = mat.row;    col = mat.col; 
+    data = mat.data;
+   
+    mat.row = 0; mat.col = 0;
+    mat.data = nullptr;
+}
+
+Vec operator*(Mat& mat, Vec& vec)
+{
+    if(mat.col == vec.getSize())
+    {
+       Vec res(mat.row);
+       for(int i=0; i<mat.row; i++)
+           for(int j=0; j<mat.col; j++)
+               res[i] += vec[j]*mat.data[i][j];
+       return std::move(res);
+    }
+    else
+    {
+        std::cerr << "Matrix and Vector size is not compatible" << std::endl;
+        return NULL;
+    }
+}
+
+Vec operator*(Mat& mat, Vec&& vec)
+{
+    if(mat.col == vec.getSize())
+    {
+       Vec res(mat.row);
+       for(int i=0; i<mat.row; i++)
+           for(int j=0; j<mat.col; j++)
+               res[i] += vec[j]*mat.data[i][j];
+       return std::move(res);
+    }
+    else
+    {
+        std::cerr << "Matrix and Vector size is not compatible" << std::endl;
+        return NULL;
+    }
+}
+
+Vec operator*(Mat&& mat, Vec& vec)
+{
+    if(mat.col == vec.getSize())
+    {
+       Vec res(mat.row);
+       for(int i=0; i<mat.row; i++)
+           for(int j=0; j<mat.col; j++)
+               res[i] += vec[j]*mat.data[i][j];
+       return std::move(res);
+    }
+    else
+    {
+        std::cerr << "Matrix and Vector size is not compatible" << std::endl;
+        return NULL;
+    }
+}
+
+Vec operator*(Mat&& mat, Vec&& vec)
+{
+    if(mat.col == vec.getSize())
+    {
+       Vec res(mat.row);
+       for(int i=0; i<mat.row; i++)
+           for(int j=0; j<mat.col; j++)
+               res[i] += vec[j]*mat.data[i][j];
+       return std::move(res);
+    }
+    else
+    {
+        std::cerr << "Matrix and Vector size is not compatible" << std::endl;
+        return NULL;
+    }
+}
+
+
