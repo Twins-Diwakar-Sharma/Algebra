@@ -36,4 +36,16 @@ class Vec
         friend Vec operator*(float,Vec&&);
 };
 
+class Mat
+{
+    private:
+        float** data;
+        int row, col;
+
+    public:
+        Mat(int row, int col);
+        ~Mat();
+
+};
+
 #endif
