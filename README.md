@@ -1,6 +1,20 @@
-# Algebra
-C++ Mathematics libraray for dynamic size matrices and vector.
+# Algebra for Neural Networks
+### C++ Mathematics libraray for creation of dynamic size matrices and vector 
 
--> This library is forged to make neural networks or AI in C++.
--> This library uses the operator overloading for mathematical functions.
--> Operator overloaded functions are powered by rvalue references to reduces the number of temporaries.
+This Library is for creation of variable sized matrix and vector \
+You can make any desired size matrices or vectors for various neural network related mathematics
+```
+Vec v1(20), v2(40);
+Mat m1(30,20), m2(30, 40);
+```
+
+The library uses operator overloading which makes it an easy to understand and easy to use mathematics library 🥧
+
+```
+Vec res = m1*v1 + m2*v2;
+Vec diff = m1*v1 - m2*v2;
+```
+* _The resultant vector will automatically have the size of 30_
+* _If matrices or vectors dont have compatible sizes the library throw error_
+
+
