@@ -16,7 +16,7 @@ Vec res = m1*v1 + m2*v2;
 Vec diff = m1*v1 - m2*v2;
 ```
 _The resultant vector will automatically have the size of 30_ \
-_If matrices or vectors dont have compatible sizes the library throw error_ \
+_If matrices or vectors dont have compatible sizes the library throw error_ 
 
 
 
