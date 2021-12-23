@@ -1,5 +1,5 @@
 # Algebra for Neural Networks
-#### C++ Mathematics libraray for creation of dynamic size matrices and vector 
+### C++ Mathematics libraray for creation of dynamic size matrices and vector 
 
 This Library is for creation of variable sized matrix and vector \
 You can make any desired size matrices or vectors for various neural network related mathematics
