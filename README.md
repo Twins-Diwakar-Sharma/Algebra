@@ -9,7 +9,7 @@ Vec v1(20), v2(40);
 Mat m1(30,20), m2(30, 40);
 ```
 
-* #####  __The library uses operator overloading which makes it an easy to understand and easy to use mathematics library__ 🥧
+* #####  __The library uses operator overloading which makes it easy to understand and easy to use mathematics library__ 🥧
 
 ```
 Vec res = m1*v1 + m2*v2;
